@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1d4ed8">
+  <title>Licitações SRE Divinópolis — Consulta por CNPJ</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="container topo-conteudo">
+      <div>
+        <h1>Buscador de Licitações Escolares</h1>
+        <p class="subtitulo">SRE Divinópolis • Cruzamento automático por CNAE, prazo e distância</p>
+      </div>
+      <div class="status-box">
+        <span id="status-doc" class="status-texto">Carregando editais...</span>
+        <button id="btn-atualizar" class="btn-secundario" type="button">Atualizar editais</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card busca-card">
+      <form id="form-busca" class="busca-form">
+        <div class="campo-grupo">
+          <label for="input-cnpj">CNPJ do Fornecedor</label>
+          <!-- Substitua o <input id="input-cnpj"> por este -->
+          <input
+           type="text"
+           id="input-cnpj"
+           name="cnpj"
+           inputmode="numeric"
+           enterkeyhint="search"
+           placeholder="00.000.000/0000-00"
+           maxlength="18"
+           autocomplete="off"
+           required
+          >
+        </div>
+        <button id="btn-buscar" class="btn-primario" type="submit">Consultar Licitações</button>
+      </form>
+      <p id="mensagem-erro" class="erro oculto"></p>
+    </section>
+
+    <section id="painel-resultados" class="oculto">
+      <div class="card empresa-card">
+        <div class="empresa-cabecalho">
+          <div>
+            <h2 id="empresa-nome"></h2>
+            <p id="empresa-endereco" class="texto-suave"></p>
+          </div>
+          <span id="empresa-situacao" class="badge"></span>
+        </div>
+
+        <div class="metricas">
+          <div class="metrica">
+            <span class="metrica-valor verde" id="qtd-disponiveis">0</span>
+            <span class="metrica-label">Disponíveis no prazo</span>
+          </div>
+          <div class="metrica">
+            <span class="metrica-valor vermelho" id="qtd-expiradas">0</span>
+            <span class="metrica-label">Prazo expirado</span>
+          </div>
+          <div class="metrica">
+            <span class="metrica-valor" id="qtd-total-docs">0</span>
+            <span class="metrica-label">Total no documento</span>
+          </div>
+          <div class="metrica">
+            <span class="metrica-valor pequeno" id="hora-consulta">--</span>
+            <span class="metrica-label">Consulta realizada em</span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="abas" role="tablist">
+        <button class="aba ativa" data-aba="disponiveis" type="button">
+          Disponíveis (<span id="aba-qtd-disponiveis">0</span>)
+        </button>
+        <button class="aba" data-aba="expiradas" type="button">
+          Prazo Expirado (<span id="aba-qtd-expiradas">0</span>)
+        </button>
+        <button class="aba oculto" id="btn-aba-sem-prazo" data-aba="sem_prazo" type="button">
+          Sem Prazo (<span id="aba-qtd-sem-prazo">0</span>)
+        </button>
+      </nav>
+
+      <div id="lista-disponiveis" class="lista-cards"></div>
+      <div id="lista-expiradas" class="lista-cards oculto"></div>
+      <div id="lista-sem-prazo" class="lista-cards oculto"></div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
